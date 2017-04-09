@@ -156,7 +156,9 @@ class PdoGsbRapports{
         
         }
         public function getLesRapports($idMedecin){
-            $req = "select * from rapport where rapport.idMedecin = :idMedecin order by date";
+            $req = "select rapport.date as date, rapport.motif as motif, ";
+            $req .= " rapport.bilan as bilan, visiteur.nom as nom from rapport, visiteur ";
+            $req .= " where rapport.idVisiteur = visiteur.id and rapport.idMedecin = :idMedecin order by date";
             $stm = self::$monPdo->prepare($req);
             $stm->bindParam(':idMedecin', $idMedecin); 
             $stm->execute();
