@@ -50,9 +50,9 @@ abstract class Rest {
        $this->content_type = "application/json";
      /* Les deux lignes suivantes enlevées à cause d'un message
      failed to load reponse data (avec POST )*/
-     /*   if (isset($_SERVER['CONTENT_TYPE'])) {
+        if (isset($_SERVER['CONTENT_TYPE'])) {
             $this->content_type = $_SERVER['CONTENT_TYPE'];
-        }*/
+        }
 //error_log(print_r( "methode : ".$this->method),3,"log.txt");
         /* Récupère les paramètres de la requête et les stocke dans le tableau $request
            Un status d'erreur est retourné si la demande concerne une méthode
@@ -61,17 +61,17 @@ abstract class Rest {
         switch ($this->method) {
             case "POST" :
              $this->request = $this->cleanInputs($_REQUEST);
-        //      error_log(print_r( $this->request,true),3,"log.txt");
-             break;
+           //  error_log(print_r( $this->request,true),3,"log.txt");
+            break;
             case "DELETE" :
                 $this->request = $this->cleanInputs($_POST);
                 break;
             case "GET" :
-                 $this->request = $this->cleanInputs($_GET);
-              //   error_log(print_r( $this->request,true),3,"log.txt");
-                 break;
+                $this->request = $this->cleanInputs($_GET);
+            //    error_log(print_r( $this->request,true),3,"log.txt");
+                break;
             case "PUT" :
-                 $this->request = $this->cleanInputs($_GET);
+                $this->request = $this->cleanInputs($_REQUEST);
                 break;
             default :
                 $this->response('Methode non autorisée', 405);   // Method Not Allowed
